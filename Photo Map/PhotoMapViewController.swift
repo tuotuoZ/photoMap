@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Toucan
 
 class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate, MKMapViewDelegate {
     
@@ -19,7 +20,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let annotation = MKPointAnnotation()
         
         annotation.coordinate = locationCoordinate
-        annotation.title = "Picture!"
+        annotation.title = String(locationCoordinate.latitude)
         
         mapView.addAnnotation(annotation)
     }
@@ -29,6 +30,10 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     var choseImage:UIImage! = nil
     
+    var previewImage: UIImage!
+    
+    var annotations: [PhotoAnnotation] = []
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
@@ -37,9 +42,13 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             annotationView!.canShowCallout = true
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
         }
-        
+       
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        imageView.image = UIImage(named: "camera")
+        imageView.image = previewImage
+        //set the string
+        
+        
+        
         return annotationView
     }
 
@@ -67,6 +76,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // Do something with the images (based on your use case)
         choseImage = originalImage
+        previewImage = Toucan.Resize.resizeImage(editedImage, size: CGSize(width: 45, height: 45))
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true){

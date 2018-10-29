@@ -20,11 +20,21 @@ PODS:
   - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Toucan (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - Toucan
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - Toucan
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  Toucan: 61867fb10948c02e9804280a95eb183e98eac97a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 71efcfe3ee625bacddb1c6e1a0dad9f85fa9054f
+
+COCOAPODS: 1.5.3
